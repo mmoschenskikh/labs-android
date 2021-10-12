@@ -8,12 +8,16 @@ class MainActivity : AppCompatActivity() {
     private var secondsElapsed: Int = 0
     private lateinit var textSecondsElapsed: TextView
 
+    private var isCounting = false
+
     private var backgroundThread = Thread {
         while (true) {
             Thread.sleep(1000)
             textSecondsElapsed.post {
-                textSecondsElapsed.text =
-                    getString(R.string.seconds_elapsed_template, secondsElapsed++)
+                if (isCounting) {
+                    textSecondsElapsed.text =
+                        getString(R.string.seconds_elapsed_template, secondsElapsed++)
+                }
             }
         }
     }
@@ -23,5 +27,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         textSecondsElapsed = findViewById(R.id.textSecondsElapsed)
         backgroundThread.start()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        isCounting = true
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        secondsElapsed = savedInstanceState.getInt(STATE_SECONDS, 0)
+        textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, secondsElapsed)
+    }
+
+    override fun onStop() {
+        isCounting = false
+        super.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(STATE_SECONDS, secondsElapsed)
+        super.onSaveInstanceState(outState)
+    }
+
+    private companion object {
+        private const val STATE_SECONDS = "secondsElapsed"
     }
 }
