@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="Typos">lab1</string>
+    <string name="submit_label">Submit</string>
+    <string name="enter_your_name_hint">Enter your name</string>
+    <string name="kotlin_logo_cd">Kotlin programming language logo</string>
+    <string name="ok_label">OK</string>
+    <string name="greeting_cd">The hand that waves</string>
+    <string name="this_is_task_3">This is task 3</string>
+    <string name="call_icon_cd">Icon for making a call</string>
+    <string name="this_is_checkbox">This is checkbox</string>
+    <string name="this_is_radiobutton">This is RadioButton</string>
+    <string name="this_is_chip">This is chip</string>
+</resources>
