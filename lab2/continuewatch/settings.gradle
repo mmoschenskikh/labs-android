@@ -5,5 +5,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "task1"
+rootProject.name = "continuewatch"
 include ':app'
