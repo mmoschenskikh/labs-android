@@ -1,5 +1,7 @@
 package ru.maxultra.continuewatch
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +11,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textSecondsElapsed: TextView
 
     private var isCounting = false
+
+    private val prefs: SharedPreferences? by lazy { getPreferences(Context.MODE_PRIVATE) }
 
     private var backgroundThread = Thread {
         while (true) {
@@ -31,23 +35,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        secondsElapsed = prefs?.getInt(STATE_SECONDS, 0) ?: 0
+        textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, secondsElapsed)
         isCounting = true
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        secondsElapsed = savedInstanceState.getInt(STATE_SECONDS, 0)
-        textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, secondsElapsed++)
     }
 
     override fun onStop() {
         isCounting = false
+        prefs?.edit()
+            ?.putInt(STATE_SECONDS, secondsElapsed)
+            ?.apply()
         super.onStop()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(STATE_SECONDS, secondsElapsed)
-        super.onSaveInstanceState(outState)
     }
 
     private companion object {
