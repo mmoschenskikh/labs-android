@@ -18,5 +18,6 @@ abstract class BaseActivity<VB : ViewBinding>(
         super.onCreate(savedInstanceState)
         _binding = inflate(layoutInflater)
         setContentView(binding.root)
+        title = this::class.java.simpleName
     }
 }
