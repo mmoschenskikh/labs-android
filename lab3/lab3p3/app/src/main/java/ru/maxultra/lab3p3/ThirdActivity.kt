@@ -12,10 +12,7 @@ class ThirdActivity : BaseActivity<ActivityThirdBinding>(ActivityThirdBinding::i
         setSupportActionBar(binding.toolbar)
         setupNavigationDrawer()
 
-        binding.toFirstButton.setOnClickListener {
-            setResult(RESULT_CODE_TO_FIRST)
-            finish()
-        }
+        binding.toFirstButton.setOnClickListener { goToActivity(FirstActivity::class.java) }
         binding.toSecondButton.setOnClickListener { finish() }
     }
 
@@ -33,9 +30,5 @@ class ThirdActivity : BaseActivity<ActivityThirdBinding>(ActivityThirdBinding::i
         binding.navigationView.setNavigationItemSelectedListener(
             AboutNavigationDrawerItemListener(binding.drawerLayout)
         )
-    }
-
-    companion object {
-        const val RESULT_CODE_TO_FIRST = 66
     }
 }
