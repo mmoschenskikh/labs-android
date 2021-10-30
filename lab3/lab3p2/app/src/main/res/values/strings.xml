@@ -3,4 +3,7 @@
     <string name="to_first">To first</string>
     <string name="to_second">To second</string>
     <string name="to_third">To third</string>
+    <string name="about">About</string>
+    <string name="close_drawer_action">Close drawer</string>
+    <string name="open_drawer_action">Open drawer</string>
 </resources>

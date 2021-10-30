@@ -1,16 +1,33 @@
 package ru.maxultra.lab3p2
 
-import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.ActionBarDrawerToggle
 import ru.maxultra.lab3p2.base.BaseActivity
 import ru.maxultra.lab3p2.databinding.ActivityFirstBinding
 
 class FirstActivity : BaseActivity<ActivityFirstBinding>(ActivityFirstBinding::inflate) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.toSecondButton.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
-        }
+        setSupportActionBar(binding.toolbar)
+        setupNavigationDrawer()
+
+        binding.toSecondButton.setOnClickListener { goToActivity(SecondActivity::class.java) }
+    }
+
+    private fun setupNavigationDrawer() {
+        val toggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.toolbar,
+            R.string.open_drawer_action,
+            R.string.close_drawer_action
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        binding.navigationView.setNavigationItemSelectedListener(
+            AboutNavigationDrawerItemListener(binding.drawerLayout)
+        )
     }
 }
