@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab3p4">
         <activity
+            android:name=".FourthActivity"
+            android:exported="false"
+            android:taskAffinity=".fourth" />
+        <activity
             android:name=".FirstActivity"
             android:exported="true"
             android:launchMode="singleTask">

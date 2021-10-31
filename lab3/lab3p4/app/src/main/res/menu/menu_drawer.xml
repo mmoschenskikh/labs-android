@@ -4,4 +4,8 @@
         android:id="@+id/nav_about"
         android:icon="@drawable/ic_outline_info_24"
         android:title="@string/about" />
+    <item
+        android:id="@+id/nav_fourth"
+        android:icon="@drawable/ic_baseline_close_24"
+        android:title="@string/to_fourth" />
 </menu>

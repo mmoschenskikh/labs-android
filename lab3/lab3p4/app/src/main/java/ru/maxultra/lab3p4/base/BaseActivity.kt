@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.navigation.NavigationView
 import ru.maxultra.lab3p4.AboutActivity
+import ru.maxultra.lab3p4.FourthActivity
 import ru.maxultra.lab3p4.R
 
 abstract class BaseActivity<VB : ViewBinding>(
@@ -38,7 +39,14 @@ abstract class BaseActivity<VB : ViewBinding>(
         NavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
-                R.id.nav_about -> goToActivity(AboutActivity::class.java)
+                R.id.nav_about -> {
+                    goToActivity(AboutActivity::class.java)
+                }
+                R.id.nav_fourth -> {
+                    val intent = Intent(this@BaseActivity, FourthActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
             }
             drawerLayout.closeDrawer(GravityCompat.START)
             return true

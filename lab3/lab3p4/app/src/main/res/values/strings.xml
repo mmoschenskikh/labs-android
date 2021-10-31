@@ -6,4 +6,6 @@
     <string name="about">About</string>
     <string name="close_drawer_action">Close drawer</string>
     <string name="open_drawer_action">Open drawer</string>
+    <string name="new_activity">New activity</string>
+    <string name="to_fourth">To fourth</string>
 </resources>
