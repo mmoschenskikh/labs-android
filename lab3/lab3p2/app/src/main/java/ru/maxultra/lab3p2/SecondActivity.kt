@@ -2,7 +2,6 @@ package ru.maxultra.lab3p2
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.ActionBarDrawerToggle
 import ru.maxultra.lab3p2.base.BaseActivity
 import ru.maxultra.lab3p2.databinding.ActivitySecondBinding
 
@@ -13,6 +12,7 @@ class SecondActivity : BaseActivity<ActivitySecondBinding>(ActivitySecondBinding
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbar)
         setupNavigationDrawer()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.bnToFirst.setOnClickListener { finish() }
         binding.bnToThird.setOnClickListener {
@@ -31,16 +31,6 @@ class SecondActivity : BaseActivity<ActivitySecondBinding>(ActivitySecondBinding
     }
 
     private fun setupNavigationDrawer() {
-        val toggle = ActionBarDrawerToggle(
-            this,
-            binding.drawerLayout,
-            binding.toolbar,
-            R.string.open_drawer_action,
-            R.string.close_drawer_action
-        )
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
         binding.drawerNavView.setNavigationItemSelectedListener(
             AboutNavigationDrawerItemListener(binding.drawerLayout)
         )

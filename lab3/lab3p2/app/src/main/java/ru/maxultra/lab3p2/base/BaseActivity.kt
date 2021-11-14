@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewbinding.ViewBinding
@@ -32,6 +33,11 @@ abstract class BaseActivity<VB : ViewBinding>(
     protected fun goToActivity(activityClass: Class<out Activity>) {
         val intent = Intent(this, activityClass)
         startActivity(intent)
+    }
+
+    override fun setSupportActionBar(toolbar: Toolbar?) {
+        super.setSupportActionBar(toolbar)
+        toolbar?.setNavigationOnClickListener { onBackPressed() }
     }
 
     protected inner class AboutNavigationDrawerItemListener(private val drawerLayout: DrawerLayout) :
