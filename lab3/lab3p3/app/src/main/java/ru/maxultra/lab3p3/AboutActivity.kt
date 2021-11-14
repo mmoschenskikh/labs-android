@@ -9,5 +9,6 @@ class AboutActivity : BaseActivity<ActivityAboutBinding>(ActivityAboutBinding::i
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }
