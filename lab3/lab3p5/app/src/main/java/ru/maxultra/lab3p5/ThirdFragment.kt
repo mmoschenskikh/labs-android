@@ -10,9 +10,9 @@ class ThirdFragment : BaseFragment<FragmentThirdBinding>(FragmentThirdBinding::i
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toFirstButton.setOnClickListener {
+        binding.bnToFirst.setOnClickListener {
             findNavController().popBackStack(R.id.firstFragment, false)
         }
-        binding.toSecondButton.setOnClickListener { findNavController().navigateUp() }
+        binding.bnToSecond.setOnClickListener { findNavController().navigateUp() }
     }
 }

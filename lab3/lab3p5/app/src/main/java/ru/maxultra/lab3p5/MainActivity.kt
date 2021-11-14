@@ -17,7 +17,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             setOf(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment),
             binding.drawerLayout
         )
-        binding.navigationView.setupWithNavController(navController)
+        binding.drawerNavView.setupWithNavController(navController)
         binding.toolbar.setupWithNavController(navController, conf)
     }
 }

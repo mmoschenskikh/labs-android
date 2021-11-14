@@ -3,18 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment2"
     android:orientation="vertical"
     tools:context=".SecondFragment">
 
     <Button
-        android:id="@+id/toFirstButton"
+        android:id="@+id/bnToFirst"
         style="@style/NavigationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/to_first" />
 
     <Button
-        android:id="@+id/toThirdButton"
+        android:id="@+id/bnToThird"
         style="@style/NavigationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
