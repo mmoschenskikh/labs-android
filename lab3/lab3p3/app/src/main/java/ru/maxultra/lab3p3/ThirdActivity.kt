@@ -12,8 +12,8 @@ class ThirdActivity : BaseActivity<ActivityThirdBinding>(ActivityThirdBinding::i
         setSupportActionBar(binding.toolbar)
         setupNavigationDrawer()
 
-        binding.toFirstButton.setOnClickListener { goToActivity(FirstActivity::class.java) }
-        binding.toSecondButton.setOnClickListener { finish() }
+        binding.bnToFirst.setOnClickListener { goToActivity(MainActivity::class.java) }
+        binding.bnToSecond.setOnClickListener { finish() }
     }
 
     private fun setupNavigationDrawer() {
@@ -27,7 +27,7 @@ class ThirdActivity : BaseActivity<ActivityThirdBinding>(ActivityThirdBinding::i
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        binding.navigationView.setNavigationItemSelectedListener(
+        binding.drawerNavView.setNavigationItemSelectedListener(
             AboutNavigationDrawerItemListener(binding.drawerLayout)
         )
     }

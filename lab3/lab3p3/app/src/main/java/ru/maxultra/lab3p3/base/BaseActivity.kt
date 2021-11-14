@@ -38,7 +38,7 @@ abstract class BaseActivity<VB : ViewBinding>(
         NavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
-                R.id.nav_about -> goToActivity(AboutActivity::class.java)
+                R.id.aboutActivity -> goToActivity(AboutActivity::class.java)
             }
             drawerLayout.closeDrawer(GravityCompat.START)
             return true
