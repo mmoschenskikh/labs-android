@@ -12,11 +12,11 @@ class ThirdActivity : BaseActivity<ActivityThirdBinding>(ActivityThirdBinding::i
         setSupportActionBar(binding.toolbar)
         setupNavigationDrawer()
 
-        binding.toFirstButton.setOnClickListener {
+        binding.bnToFirst.setOnClickListener {
             setResult(RESULT_CODE_TO_FIRST)
             finish()
         }
-        binding.toSecondButton.setOnClickListener { finish() }
+        binding.bnToSecond.setOnClickListener { finish() }
     }
 
     private fun setupNavigationDrawer() {
@@ -30,7 +30,7 @@ class ThirdActivity : BaseActivity<ActivityThirdBinding>(ActivityThirdBinding::i
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        binding.navigationView.setNavigationItemSelectedListener(
+        binding.drawerNavView.setNavigationItemSelectedListener(
             AboutNavigationDrawerItemListener(binding.drawerLayout)
         )
     }

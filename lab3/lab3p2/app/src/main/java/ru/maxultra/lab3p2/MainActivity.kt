@@ -5,14 +5,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import ru.maxultra.lab3p2.base.BaseActivity
 import ru.maxultra.lab3p2.databinding.ActivityFirstBinding
 
-class FirstActivity : BaseActivity<ActivityFirstBinding>(ActivityFirstBinding::inflate) {
+class MainActivity : BaseActivity<ActivityFirstBinding>(ActivityFirstBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbar)
         setupNavigationDrawer()
 
-        binding.toSecondButton.setOnClickListener { goToActivity(SecondActivity::class.java) }
+        binding.bnToSecond.setOnClickListener { goToActivity(SecondActivity::class.java) }
     }
 
     private fun setupNavigationDrawer() {
@@ -26,7 +26,7 @@ class FirstActivity : BaseActivity<ActivityFirstBinding>(ActivityFirstBinding::i
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        binding.navigationView.setNavigationItemSelectedListener(
+        binding.drawerNavView.setNavigationItemSelectedListener(
             AboutNavigationDrawerItemListener(binding.drawerLayout)
         )
     }
