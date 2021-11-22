@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">picture-coroutines</string>
+    <string name="seconds_elapsed_template">\"Seconds elapsed: %d\"</string>
+</resources>
