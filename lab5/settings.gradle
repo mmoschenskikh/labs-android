@@ -5,7 +5,10 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "continuewatch"
-include ':threads'
-include ':executorservice'
-include ':coroutines'
+rootProject.name = "lab5"
+include ':t1-threads'
+include ':t1-executorservice'
+include ':t1-coroutines'
+include ':t2'
+include ':t3'
+include ':t4'
