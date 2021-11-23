@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -15,8 +14,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var textSecondsElapsed: TextView
     private var secondsElapsed: Int = 0
-
-    private var countJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,25 +23,24 @@ class MainActivity : AppCompatActivity() {
         secondsElapsed = savedInstanceState?.getInt(STATE_SECONDS) ?: 0
         textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, secondsElapsed)
 
-        countJob = lifecycleScope.launch {
+        lifecycleScope.launch {
+            Log.d(TAG, "Coroutine execution started")
             repeatOnLifecycle(Lifecycle.State.STARTED) {
+                Log.d(TAG, "Inner coroutine execution started")
                 while (true) {
                     delay(1000L)
                     Log.d(TAG, "Value updated: $secondsElapsed")
                     textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, secondsElapsed++)
                 }
             }
+        }.apply {
+            invokeOnCompletion { Log.d(TAG, "Coroutine execution finished") }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(STATE_SECONDS, secondsElapsed)
         super.onSaveInstanceState(outState)
-    }
-
-    override fun onDestroy() {
-        countJob?.cancel()
-        super.onDestroy()
     }
 
     private companion object {
