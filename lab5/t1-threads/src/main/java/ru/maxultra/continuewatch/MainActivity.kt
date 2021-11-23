@@ -10,21 +10,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textSecondsElapsed: TextView
 
     private var backgroundThread: Thread? = null
-    private var secondsElapsed = 0L
-    private var startTime = 0L
+
+    private var secondsElapsedBeforeLastOnStart = 0L
+    private var lastOnStartCallTime = 0L
+    private var lastTimeToDisplay: Long = 0L
+
+    private val timeToDisplay: Long
+        get() = (System.currentTimeMillis() - lastOnStartCallTime) / 1000 + secondsElapsedBeforeLastOnStart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textSecondsElapsed = findViewById(R.id.textSecondsElapsed)
 
-        secondsElapsed = savedInstanceState?.getLong(STATE_SECONDS) ?: 0
-        textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, secondsElapsed)
+        lastTimeToDisplay = savedInstanceState?.getLong(STATE_SECONDS) ?: 0
+        textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, lastTimeToDisplay)
     }
 
     override fun onStart() {
         super.onStart()
-        startTime = System.currentTimeMillis()
+        secondsElapsedBeforeLastOnStart = lastTimeToDisplay
+        lastOnStartCallTime = System.currentTimeMillis()
         backgroundThread = prepareNewThread()
         backgroundThread?.start()
     }
@@ -36,8 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        secondsElapsed = getSecondsElapsedCount()
-        outState.putLong(STATE_SECONDS, secondsElapsed)
+        outState.putLong(STATE_SECONDS, lastTimeToDisplay)
         super.onSaveInstanceState(outState)
     }
 
@@ -46,9 +51,9 @@ class MainActivity : AppCompatActivity() {
         try {
             while (Thread.currentThread().isInterrupted.not()) {
                 Thread.sleep(1000)
-                val timeToDisplay = getSecondsElapsedCount()
+                lastTimeToDisplay = timeToDisplay
                 textSecondsElapsed.post {
-                    textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, timeToDisplay)
+                    textSecondsElapsed.text = getString(R.string.seconds_elapsed_template, lastTimeToDisplay)
                 }
             }
         } catch (e: InterruptedException) {
@@ -56,8 +61,6 @@ class MainActivity : AppCompatActivity() {
         }
         Log.d(TAG, "Thread execution finished")
     }
-
-    private fun getSecondsElapsedCount() = (System.currentTimeMillis() - startTime) / 1000 + secondsElapsed
 
     private companion object {
         private const val STATE_SECONDS = "secondsElapsed"
